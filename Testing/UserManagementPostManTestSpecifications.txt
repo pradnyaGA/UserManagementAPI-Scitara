@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Management API",
+    "version": "1.0.0",
+    "description": "Automated tests for Node.js User Management API with JWT"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "{{BaseUrl}}"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Get All Users -Schema Validation",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer {{authToken}}"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "Get All Users -Incorrect status code validation",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "deprecated": false,
+            "schema": {},
+            "example": "Bearer {{authToken}}"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/1": {
+      "get": {
+        "summary": "Get User by ID (Positive)",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer {{authToken}}"
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "summary": "Update user",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "John"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "John.abc@example.com"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/999": {
+      "get": {
+        "summary": "Get User by ID (Negative)",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer {{authToken}}"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/": {
+      "post": {
+        "summary": "Create a new user -Valid data",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "utc-millisec"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                }
+              },
+              "example": {
+                "id": "3",
+                "name": "Pradnya",
+                "email": "pradnya.gaikwad@emerson.com"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/2": {
+      "delete": {
+        "summary": "Delete User",
+        "responses": {}
+      }
+    }
+  }
+}
